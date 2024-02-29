@@ -52,13 +52,13 @@ const makeSut = (): SutTypes => {
 };
 
 describe("DbAddAccount Usecase", () => {
-  test("Shoul call Hasher with correct passowrd", async () => {
+  test("Should call Hasher with correct passowrd", async () => {
     const { sut, hasherStub } = makeSut();
     const encryptSpy = jest.spyOn(hasherStub, "hash");
     await sut.add(makeFakeAccountData());
     expect(encryptSpy).toHaveBeenCalledWith("valid_password");
   });
-  test("Shoul throw if Hasher throws", async () => {
+  test("Should throw if Hasher throws", async () => {
     const { sut, hasherStub } = makeSut();
     jest
       .spyOn(hasherStub, "hash")
@@ -69,7 +69,7 @@ describe("DbAddAccount Usecase", () => {
     await expect(promise).rejects.toThrow();
   });
 
-  test("Shoul call AddAccountRepository with correct values", async () => {
+  test("Should call AddAccountRepository with correct values", async () => {
     const { sut, addAccountRepositoryStub } = makeSut();
     const addSpy = jest.spyOn(addAccountRepositoryStub, "add");
     await sut.add(makeFakeAccountData());
@@ -79,7 +79,7 @@ describe("DbAddAccount Usecase", () => {
       password: "hashed_password",
     });
   });
-  test("Shoul throw if AddAccountRepository throws", async () => {
+  test("Should throw if AddAccountRepository throws", async () => {
     const { sut, addAccountRepositoryStub } = makeSut();
     jest
       .spyOn(addAccountRepositoryStub, "add")
@@ -89,7 +89,7 @@ describe("DbAddAccount Usecase", () => {
     const promise = sut.add(makeFakeAccountData());
     await expect(promise).rejects.toThrow();
   });
-  test("Shoul return an account on success", async () => {
+  test("Should return an account on success", async () => {
     // casos de sucesso a gente não faz o mock, somente para casos de erros
     const { sut } = makeSut();
     const account = await sut.add(makeFakeAccountData());
