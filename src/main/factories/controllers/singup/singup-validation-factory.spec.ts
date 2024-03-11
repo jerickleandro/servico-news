@@ -6,9 +6,9 @@ import {
   ValidationComposite,
 } from "../../../../validation/validators";
 
-import { Validation } from "../../../../presentation/protocols/validation";
+import { type Validation } from "../../../../presentation/protocols/validation";
 
-import { EmailValidator } from "../../../../validation/protcols/email-validator";
+import { type EmailValidator } from "../../../../validation/protcols/email-validator";
 
 import { makeSingUpValidation } from "./singup-validation-factory";
 

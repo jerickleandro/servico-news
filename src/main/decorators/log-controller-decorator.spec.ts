@@ -1,17 +1,17 @@
-import { LogErrorRepository } from "../../data/protocols/db/log/log-error-repository";
-import { AccountModel } from "../../domain/models/account";
+import { type LogErrorRepository } from "../../data/protocols/db/log/log-error-repository";
+import { type AccountModel } from "../../domain/models/account";
 import { serverError, ok } from "../../presentation/helpers/http/http-helper";
 import {
-  Controller,
-  HttpRequest,
-  HttpResponse,
+  type Controller,
+  type HttpRequest,
+  type HttpResponse,
 } from "../../presentation/protocols";
 import { LogControllerDecorator } from "./log-controller-decorator";
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise((resolve) => resolve(ok(makeFakeAccount())));
+      return await new Promise((resolve) => { resolve(ok(makeFakeAccount())); });
     }
   }
   return new ControllerStub();
@@ -19,7 +19,7 @@ const makeController = (): Controller => {
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
     async logError(stack: string): Promise<void> {
-      return new Promise((resolve) => resolve());
+      await new Promise<void>((resolve) => { resolve(); });
     }
   }
   return new LogErrorRepositoryStub();
@@ -46,9 +46,9 @@ const makeFakeServerError = (): HttpResponse => {
 };
 
 interface SutTypes {
-  controllerStub: Controller;
-  sut: LogControllerDecorator;
-  logErrorRepositoryStub: LogErrorRepository;
+  controllerStub: Controller
+  sut: LogControllerDecorator
+  logErrorRepositoryStub: LogErrorRepository
 }
 
 const makeSut = (): SutTypes => {
@@ -86,7 +86,7 @@ describe("LogController Decorator", () => {
     jest
       .spyOn(controllerStub, "handle")
       .mockReturnValueOnce(
-        new Promise((resolve) => resolve(makeFakeServerError()))
+        new Promise((resolve) => { resolve(makeFakeServerError()); })
       );
 
     await sut.handle(makeFakeRequest());

@@ -1,9 +1,9 @@
 import {
-  Hasher,
-  AccountModel,
-  AddAccount,
-  AddAccountModel,
-  AddAccountRepository,
+  type Hasher,
+  type AccountModel,
+  type AddAccount,
+  type AddAccountModel,
+  type AddAccountRepository,
 } from "./db-add-account-protocols";
 export class DbAddAccount implements AddAccount {
   constructor(
@@ -13,6 +13,7 @@ export class DbAddAccount implements AddAccount {
     this.hasher = hasher;
     this.addAccountRepository = addAccountRepository;
   }
+
   async add(accountData: AddAccountModel): Promise<AccountModel> {
     const hashPassword = await this.hasher.hash(accountData.password);
     const account = await this.addAccountRepository.add(
@@ -20,6 +21,6 @@ export class DbAddAccount implements AddAccount {
         password: hashPassword,
       })
     );
-    return new Promise((resolve) => resolve(account));
+    return await new Promise((resolve) => { resolve(account); });
   }
 }

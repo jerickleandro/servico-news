@@ -1,10 +1,10 @@
 import {
-  HashComparer,
-  AuthenticationModel,
-  LoadAccountByEmailRepository,
-  Encrypter,
-  UpdateAccessTokenRepository,
-  Authentication,
+  type HashComparer,
+  type AuthenticationModel,
+  type LoadAccountByEmailRepository,
+  type Encrypter,
+  type UpdateAccessTokenRepository,
+  type Authentication,
 } from "./db-authentication-protocols";
 export class DbAuthentication implements Authentication {
   constructor(
@@ -18,6 +18,7 @@ export class DbAuthentication implements Authentication {
     this.encrypter = encrypter;
     this.updateAccessTokenRepository = updateAccessTokenRepository;
   }
+
   async auth(authentication: AuthenticationModel): Promise<string> {
     const account = await this.loadAccountByEmailRepository.loadByEmail(
       authentication.email

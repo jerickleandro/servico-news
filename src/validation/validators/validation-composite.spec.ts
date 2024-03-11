@@ -1,5 +1,5 @@
 import { MissingParamError } from "../../presentation/errors";
-import { Validation } from "../../presentation/protocols/validation";
+import { type Validation } from "../../presentation/protocols/validation";
 import { ValidationComposite } from "./validation-composite";
 
 const makeValidation = (): Validation => {
@@ -11,8 +11,8 @@ const makeValidation = (): Validation => {
   return new ValidationStub();
 };
 interface SutTypes {
-  validationStubs: Validation[];
-  sut: ValidationComposite;
+  validationStubs: Validation[]
+  sut: ValidationComposite
 }
 
 const makeSut = (): SutTypes => {

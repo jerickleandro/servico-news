@@ -1,6 +1,6 @@
 import { SingUpController } from "../../../../presentation/controller/singup/singup-controller";
 
-import { Controller } from "../../../../presentation/protocols";
+import { type Controller } from "../../../../presentation/protocols";
 
 import { makeLogControllerDecorator } from "../../decorators/log-controller-decorator-factory";
 

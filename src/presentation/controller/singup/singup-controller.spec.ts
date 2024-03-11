@@ -1,13 +1,13 @@
 import { SingUpController } from "./singup-controller";
 import { EmailInUseError, MissingParamError } from "../../errors";
 import {
-  AccountModel,
-  AddAccount,
-  AddAccountModel,
-  Authentication,
-  AuthenticationModel,
-  HttpRequest,
-  Validation,
+  type AccountModel,
+  type AddAccount,
+  type AddAccountModel,
+  type Authentication,
+  type AuthenticationModel,
+  type HttpRequest,
+  type Validation,
 } from "./singup-controller-protocols";
 import {
   ok,
@@ -20,7 +20,7 @@ const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add(account: AddAccountModel): Promise<AccountModel> {
       const fakeAccount = makeFakeAccount();
-      return new Promise((resolve) => resolve(fakeAccount));
+      return await new Promise((resolve) => { resolve(fakeAccount); });
     }
   }
   return new AddAccountStub();
@@ -38,7 +38,7 @@ const makeValidation = (): Validation => {
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth(authentication: AuthenticationModel): Promise<string> {
-      return new Promise((resolve) => resolve("any_token"));
+      return await new Promise((resolve) => { resolve("any_token"); });
     }
   }
   return new AuthenticationStub();
@@ -60,10 +60,10 @@ const makeFakeRequest = (): HttpRequest => ({
   },
 });
 interface SutTypes {
-  sut: SingUpController;
-  addAccountStub: AddAccount;
-  validationStub: Validation;
-  authenticationStub: Authentication;
+  sut: SingUpController
+  addAccountStub: AddAccount
+  validationStub: Validation
+  authenticationStub: Authentication
 }
 const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount();
@@ -86,7 +86,7 @@ describe("SingUp Controller", () => {
   test("Should return 500 if AddAccount throws", async () => {
     const { sut, addAccountStub } = makeSut();
     jest.spyOn(addAccountStub, "add").mockImplementationOnce(async () => {
-      return new Promise((resolve, reject) => reject(new Error()));
+      return await new Promise((resolve, reject) => { reject(new Error()); });
     });
     const httpResponse = await sut.handle(makeFakeRequest());
 
@@ -153,7 +153,7 @@ describe("SingUp Controller", () => {
     jest
       .spyOn(authenticationStub, "auth")
       .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
+        new Promise((resolve, reject) => { reject(new Error()); })
       );
 
     const httpResponse = await sut.handle(makeFakeRequest());
@@ -164,7 +164,7 @@ describe("SingUp Controller", () => {
     const { sut, addAccountStub } = makeSut();
     jest
       .spyOn(addAccountStub, "add")
-      .mockReturnValueOnce(new Promise((resolve) => resolve(null)));
+      .mockReturnValueOnce(new Promise((resolve) => { resolve(null); }));
 
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()));

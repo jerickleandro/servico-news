@@ -2,7 +2,7 @@ import { AccountMongoRepository } from "../../../../infra/db/mongodb/account/acc
 
 import { BcryptAdapter } from "../../../../infra/criptography/bcrypt-adapter/bcrypt-adapter";
 
-import { AddAccount } from "../../../../domain/usecases/add-account";
+import { type AddAccount } from "../../../../domain/usecases/add-account";
 
 import { DbAddAccount } from "../../../../data/usecases/add-account/db-add-account";
 

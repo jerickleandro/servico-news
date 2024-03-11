@@ -2,7 +2,7 @@ import { LogControllerDecorator } from "../../../decorators/log-controller-decor
 
 import { makeLoginValidation } from "./login-validation-factory";
 
-import { Controller } from "../../../../presentation/protocols";
+import { type Controller } from "../../../../presentation/protocols";
 
 import { LoginController } from "../../../../presentation/controller/login/login-controller";
 

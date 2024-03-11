@@ -1,6 +1,6 @@
 import { MongoHelper } from "../helpers/mongo-helper";
 import { AccountMongoRepository } from "./account-mongo-repository";
-import { Collection } from "mongodb";
+import { type Collection } from "mongodb";
 let accountCollection: Collection;
 
 describe("Account Mongo Repository", () => {
@@ -57,6 +57,7 @@ describe("Account Mongo Repository", () => {
       password: "any_password",
     });
     const fakeAccount = res.ops[0];
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     await sut.updateAccessToken(fakeAccount._id, "any_token");
     const account = await accountCollection.findOne({ _id: fakeAccount._id });
     expect(account).toBeTruthy(); // checks if the value is not false

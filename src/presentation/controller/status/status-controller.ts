@@ -1,7 +1,7 @@
 import {
-  Controller,
-  HttpRequest,
-  HttpResponse,
+  type Controller,
+  type HttpRequest,
+  type HttpResponse,
 } from "./status-controller-protocols";
 import {
   badRequest,

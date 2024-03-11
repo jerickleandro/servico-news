@@ -1,5 +1,5 @@
 import { EmailValidation } from "./email-validation";
-import { EmailValidator } from "../../validation/protcols/email-validator";
+import { type EmailValidator } from "../../validation/protcols/email-validator";
 import { InvalidParamError } from "../../presentation/errors";
 
 const makeEmailValidator = (): EmailValidator => {
@@ -11,8 +11,8 @@ const makeEmailValidator = (): EmailValidator => {
   return new EmailValidatorStub();
 };
 interface SutTypes {
-  sut: EmailValidation;
-  emailValidatorStub: EmailValidator;
+  sut: EmailValidation
+  emailValidatorStub: EmailValidator
 }
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator();
@@ -46,6 +46,7 @@ describe("Email Validation", () => {
     jest.spyOn(emailValidatorStub, "isValid").mockImplementationOnce(() => {
       throw new Error();
     });
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(sut.validate).toThrow();
   });
 });

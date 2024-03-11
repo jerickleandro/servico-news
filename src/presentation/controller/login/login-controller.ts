@@ -1,9 +1,9 @@
 import {
-  Authentication,
-  Controller,
-  HttpRequest,
-  HttpResponse,
-  Validation,
+  type Authentication,
+  type Controller,
+  type HttpRequest,
+  type HttpResponse,
+  type Validation,
 } from "./login-controller-protocols";
 import {
   badRequest,
@@ -34,6 +34,7 @@ export class LoginController implements Controller {
       }
       return ok({ accessToken });
     } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return serverError(error);
     }
   }

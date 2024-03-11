@@ -3,35 +3,51 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    ".vscode",
+    "coverage",
+    "documentacao",
+    ".platform"
+  ],
   "rules": {
-    "@typescript-eslint/no-confusing-void-expression": "off",
-    "@typescript-eslint/consistent-type-imports": "off",
-    "@typescript-eslint/quotes": "off",
-    "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/method-signature-style": "off",
-    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "eqeqeq": "off",
+    "@typescript-eslint/eqeqeq": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/comma-spacing": "off",
-    "@typescript-eslint/return-await": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/no-namespace": "off",
-    "@typescript-eslint/no-throw-literal": "off",
-    "@typescript-eslint/member-delimiter-style": [
+    "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/quotes": [
       "error",
+      "double",
       {
-        "multiline": {
-          "delimiter": "semi",
-          "requireLast": true
-        },
-        "singleline": {
-          "delimiter": "semi",
-          "requireLast": false
-        }
+        "allowTemplateLiterals": true
       }
     ],
-    "import/export": "off",
-    "n/no-path-concat": "off"
+    "@typescript-eslint/space-before-function-paren": [
+      "error",
+      {
+        "named": "never",
+        "anonymous": "always",
+        "asyncArrow": "always"
+      }
+    ],
+    "@typescript-eslint/no-useless-constructor": "off",
+    "@typescript-eslint/method-signature-style": "off",
+    "no-template-curly-in-string": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-return-assign": "off",
+    "@typescript-eslint/brace-style": "off",
+    "@typescript-eslint/no-invalid-void-type": "off"
   }
 }

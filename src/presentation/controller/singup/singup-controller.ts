@@ -1,10 +1,10 @@
 import {
-  HttpResponse,
-  HttpRequest,
-  Controller,
-  AddAccount,
-  Validation,
-  Authentication,
+  type HttpResponse,
+  type HttpRequest,
+  type Controller,
+  type AddAccount,
+  type Validation,
+  type Authentication,
 } from "./singup-controller-protocols";
 import {
   badRequest,
@@ -20,6 +20,7 @@ export class SingUpController implements Controller {
     protected validation: Validation,
     protected authentication: Authentication
   ) {}
+
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body);
@@ -41,6 +42,7 @@ export class SingUpController implements Controller {
       });
       return ok({ accessToken });
     } catch (erro) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return serverError(erro);
     }
   }
